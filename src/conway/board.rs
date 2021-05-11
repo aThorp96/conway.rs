@@ -1,7 +1,7 @@
 use rand::prelude::*;
 use std::fmt;
 
-use crate::conway::conway::{Cell, CellState, Coordinate, SimpleCell};
+use crate::conway::cell::{Cell, CellState, SimpleCell, Coordinate};
 
 pub struct Board {
     width: usize,
@@ -29,9 +29,9 @@ impl Board {
         }
     }
 
-    pub fn get(&self, x: usize, y: usize) -> Option<SimpleCell> {
-        if x < self.width && x >= 0 && y < self.height && y >= 0 {
-            Some(self.cells[x][y].clone())
+    pub fn get(&self, x: i32, y: i32) -> Option<SimpleCell> {
+        if x < self.width as i32 && x >= 0 && y < self.height as i32 && y >= 0 {
+            Some(self.cells[x as usize][y as usize].clone())
         } else {
             None
         }
@@ -76,7 +76,7 @@ impl Board {
     fn get_cells(&self, coordinates: Vec<Coordinate>) -> Vec<SimpleCell> {
         let mut cells = Vec::new();
         for c in coordinates {
-            if let Some(cell) = self.get(c.x as usize, c.y as usize) {
+            if let Some(cell) = self.get(c.x, c.y) {
                 cells.push(cell);
             }
         }

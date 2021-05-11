@@ -3,7 +3,7 @@ use std::{thread, time};
 mod conway;
 
 use conway::board::Board;
-use conway::conway::CellState;
+use conway::cell::CellState;
 
 fn sleep(time_ms: usize) {
     let sleep_time = time::Duration::from_millis(time_ms as u64);
@@ -19,8 +19,8 @@ fn main() {
     b.set(2, 0, CellState::Alive);
     b.set(2, 1, CellState::Alive);
 
-    for i in 0..50 {
-        println!("Board:\n{}", b);
+    for i in 0..=30 {
+        println!("Board: {}\n{}", i, b);
         b.step();
         sleep(100);
     }
